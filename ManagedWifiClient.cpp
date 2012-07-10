@@ -2,5 +2,5 @@
 
 #include "stdafx.h"
 
-#include "ManagedWifi.h"
+#include "ManagedWifiClient.h"
 
