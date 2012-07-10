@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ManagedWifi", "ManagedWifi.vcxproj", "{9218C29A-2E97-4319-A740-69B06280F001}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9218C29A-2E97-4319-A740-69B06280F001}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9218C29A-2E97-4319-A740-69B06280F001}.Debug|Win32.Build.0 = Debug|Win32
+		{9218C29A-2E97-4319-A740-69B06280F001}.Release|Win32.ActiveCfg = Release|Win32
+		{9218C29A-2E97-4319-A740-69B06280F001}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
