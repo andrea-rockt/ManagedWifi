@@ -27,6 +27,12 @@
     <ClInclude Include="IManagedWifiClient.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="Interface.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="Network.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -36,6 +42,12 @@
       <Filter>File di origine</Filter>
     </ClCompile>
     <ClCompile Include="ManagedWifiClient.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="Interface.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="Network.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>
