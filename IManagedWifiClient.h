@@ -10,6 +10,6 @@ namespace ManagedWifi {
 			ReadOnlyCollection<Interface^> ^ get();
 		}
 
-		public bool Scan();
+		virtual bool Scan();
 	};
 }
