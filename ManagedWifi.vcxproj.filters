@@ -33,6 +33,9 @@
     <ClInclude Include="ManagedWifiContext.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="Exceptions.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">

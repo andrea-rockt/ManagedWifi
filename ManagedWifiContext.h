@@ -13,7 +13,12 @@ namespace ManagedWifi {
 	public ref class ManagedWifiContext : public IManagedWifiContext
 	{
 	public:
-		ManagedWifiContext();
+		enum class NWlanVersion{
+					WindowsXP=1, 
+					WindowsVista=2
+				};
+
+		ManagedWifiContext(ManagedWifiContext::NWlanVersion  requiredClientVersion);
 		
 		~ManagedWifiContext();
 		
@@ -21,15 +26,16 @@ namespace ManagedWifi {
 			ReadOnlyCollection<Interface^> ^ get(void);
 		};
 
-		virtual bool Scan();
-
 		property bool IsDisposed{
 			bool get();
 		};
 
 	private:
 		bool _isDisposed;
-
+		HANDLE _nwlanHandle;
+		DWORD _obtainedVersion;
+		Guid ManagedWifiContext::FromGUID( _GUID& guid );
+		_GUID ManagedWifiContext::ToGUID( Guid& guid );
 	protected:
 		!ManagedWifiContext();
 		// TODO: aggiungere qui i metodi per la classe.

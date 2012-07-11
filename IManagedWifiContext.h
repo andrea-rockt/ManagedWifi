@@ -9,7 +9,5 @@ namespace ManagedWifi {
 		virtual property ReadOnlyCollection<Interface^> ^ Interfaces{
 			ReadOnlyCollection<Interface^> ^ get();
 		}
-
-		virtual bool Scan();
 	};
 }

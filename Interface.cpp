@@ -21,4 +21,8 @@ namespace ManagedWifi{
 		_guid=guid;
 		_state=state;
 	}
+
+	ReadOnlyCollection<Network^> ^ Interface::Networks::get(){
+		return nullptr;
+	}
 }

@@ -39,7 +39,7 @@ namespace ManagedWifi{
 		Interface(String ^ description, System::Guid guid, InterfaceState state);
 
 	internal:
-		WeakReference ^ _parent;
+		WeakReference ^ Context;
 
 	private:
 		initonly String ^ _description;

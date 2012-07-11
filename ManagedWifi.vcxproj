@@ -76,6 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Exceptions.h" />
     <ClInclude Include="IManagedWifiContext.h" />
     <ClInclude Include="Interface.h" />
     <ClInclude Include="ManagedWifiContext.h" />
