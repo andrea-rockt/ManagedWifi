@@ -10,8 +10,9 @@ using namespace System::Collections::Generic;
 
 namespace ManagedWifi {
 
-	public ref class ManagedWifiContext : public IManagedWifiContext
+	public ref class ManagedWifiContext : IManagedWifiContext
 	{
+
 	public:
 		enum class NWlanVersion{
 					WindowsXP=1, 
@@ -22,14 +23,16 @@ namespace ManagedWifi {
 		
 		~ManagedWifiContext();
 		
-		virtual property ReadOnlyCollection<Interface^> ^ Interfaces{
-			ReadOnlyCollection<Interface^> ^ get(void);
+		virtual property ReadOnlyCollection<Interface^> ^ Interfaces {
+			ReadOnlyCollection<Interface^> ^ get();
 		};
 
-		property bool IsDisposed{
-			bool get();
+		virtual property Boolean ^ IsDisposed{
+			Boolean ^ get(){
+				return gcnew Boolean(_isDisposed);
+			};
 		};
-
+		
 	private:
 		bool _isDisposed;
 		HANDLE _nwlanHandle;

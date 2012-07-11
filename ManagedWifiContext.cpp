@@ -45,11 +45,11 @@ namespace ManagedWifi {
 
 		WlanCloseHandle( _nwlanHandle, NULL );
 	}
-
+	
 	ReadOnlyCollection<Interface^> ^ ManagedWifiContext::Interfaces::get(){
 
 		IList<Interface ^> ^ interfaceList = gcnew List<Interface ^>();
-
+		
 		PWLAN_INTERFACE_INFO_LIST interface_info_list;
 		PWLAN_INTERFACE_INFO interface_info;
 		DWORD result;
@@ -73,13 +73,9 @@ namespace ManagedWifi {
 		}
 
 		WlanFreeMemory(interface_info_list);
-
+	
 		return gcnew ReadOnlyCollection<Interface ^>(interfaceList);
-	}
-
-	bool ManagedWifiContext::IsDisposed::get(){
-		return _isDisposed;
-	}
+	}	
 
 	IList<Network ^> ^ ManagedWifiContext::GetAvailableNetworks(Interface^ i){
 		return nullptr;
