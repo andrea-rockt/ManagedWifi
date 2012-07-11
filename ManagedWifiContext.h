@@ -1,6 +1,6 @@
 // ManagedWifi.h
 #pragma once
-#include"IManagedWifiClient.h"
+#include"IManagedWifiContext.h"
 #include "Interface.h"
 #include "Network.h"
 
@@ -10,12 +10,12 @@ using namespace System::Collections::Generic;
 
 namespace ManagedWifi {
 
-	public ref class ManagedWifiClient : public IManagedWifiClient
+	public ref class ManagedWifiContext : public IManagedWifiContext
 	{
 	public:
-		ManagedWifiClient();
+		ManagedWifiContext();
 		
-		~ManagedWifiClient();
+		~ManagedWifiContext();
 		
 		virtual property ReadOnlyCollection<Interface^> ^ Interfaces{
 			ReadOnlyCollection<Interface^> ^ get(void);
@@ -31,7 +31,7 @@ namespace ManagedWifi {
 		bool _isDisposed;
 
 	protected:
-		!ManagedWifiClient();
+		!ManagedWifiContext();
 		// TODO: aggiungere qui i metodi per la classe.
 
 	internal:

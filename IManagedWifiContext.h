@@ -4,7 +4,7 @@
 using namespace System;
 using namespace System::Collections::ObjectModel;
 namespace ManagedWifi {
-	public interface class IManagedWifiClient : IDisposable{
+	public interface class IManagedWifiContext : IDisposable{
 	public:
 		virtual property ReadOnlyCollection<Interface^> ^ Interfaces{
 			ReadOnlyCollection<Interface^> ^ get();
