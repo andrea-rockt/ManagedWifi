@@ -1,6 +1,6 @@
 #pragma once
 namespace ManagedWifi{
-ref class Network
+public ref class Network
 {
 public:
 	Network(void);

@@ -6,7 +6,7 @@ using namespace System;
 using namespace System::Collections::ObjectModel;
 
 namespace ManagedWifi{
-	ref class Interface
+	public ref class Interface
 	{
 	public:
 		///<summary> Enum describing possible states of a wireless interface </summary>
@@ -38,7 +38,7 @@ namespace ManagedWifi{
 
 		Interface(String ^ description, System::Guid guid, InterfaceState state);
 
-	internal:
+	public:
 		WeakReference ^ Context;
 
 	private:
