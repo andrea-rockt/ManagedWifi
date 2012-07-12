@@ -76,13 +76,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ManagedWifi.h" />
+    <ClInclude Include="Exceptions.h" />
+    <ClInclude Include="IManagedWifiContext.h" />
+    <ClInclude Include="Interface.h" />
+    <ClInclude Include="ManagedWifiContext.h" />
+    <ClInclude Include="Network.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
-    <ClCompile Include="ManagedWifi.cpp" />
+    <ClCompile Include="Interface.cpp" />
+    <ClCompile Include="ManagedWifiContext.cpp" />
+    <ClCompile Include="Network.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
