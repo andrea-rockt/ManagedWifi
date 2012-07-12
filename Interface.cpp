@@ -1,5 +1,7 @@
 #include "StdAfx.h"
 #include "Interface.h"
+#include "ManagedWifiContext.h"
+using namespace System::Collections::Generic;
 
 namespace ManagedWifi{
 
@@ -23,6 +25,16 @@ namespace ManagedWifi{
 	}
 
 	ReadOnlyCollection<Network^> ^ Interface::Networks::get(){
-		return nullptr;
+		if(this->Context->IsAlive){
+
+			ManagedWifiContext ^ Context =(ManagedWifiContext ^) this->Context->Target;
+
+			if(Context->IsDisposed->Equals(false)){
+				IList<Network ^> ^ networks = ((ManagedWifiContext ^)(this->Context->Target))->GetAvailableNetworks(this);
+				return gcnew ReadOnlyCollection<Network^>(networks);
+			}
+		}
+		
+		throw gcnew ObjectDisposedException("Parent ManagedWifiContext was disposed");		
 	}
 }

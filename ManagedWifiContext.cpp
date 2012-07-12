@@ -7,6 +7,7 @@
 
 using namespace System::Runtime::InteropServices;
 using namespace System::Collections::Generic;
+using namespace System::Net::NetworkInformation;
 
 namespace ManagedWifi {
 
@@ -34,6 +35,7 @@ namespace ManagedWifi {
 			return;
 
 		this->!ManagedWifiContext();
+		Console::WriteLine("Disposed");
 		_isDisposed = true;
 	}
 
@@ -78,7 +80,79 @@ namespace ManagedWifi {
 	}	
 
 	IList<Network ^> ^ ManagedWifiContext::GetAvailableNetworks(Interface^ i){
-		return nullptr;
+			List<Network ^> ^ networkList = gcnew List<Network ^>();
+
+				DWORD result;
+				GUID guid = ToGUID(i->Guid);
+				PWLAN_AVAILABLE_NETWORK_LIST available_network_list;
+				PWLAN_AVAILABLE_NETWORK available_network;
+
+				result = WlanGetAvailableNetworkList(this->_nwlanHandle,
+					&guid,
+					0, 
+					NULL, 
+					&available_network_list);
+
+				if(result == ERROR_NDIS_DOT11_POWER_STATE_INVALID){
+					throw gcnew WlanApiException("WlanInterface is turned off");
+				}else if (result != ERROR_SUCCESS){
+					throw gcnew WlanApiException("An error occurred retrieving networks list");
+				}
+
+				for(DWORD i =0 ; i<available_network_list->dwNumberOfItems;i++){
+					available_network = (WLAN_AVAILABLE_NETWORK *) & available_network_list->Network[i];
+
+
+					String ^ ssid= Marshal::PtrToStringAnsi((IntPtr)available_network->dot11Ssid.ucSSID,(Int32)available_network->dot11Ssid.uSSIDLength);
+					Network::BSSType type = (Network::BSSType)available_network->dot11BssType;
+					ULONG signalStrength=available_network->wlanSignalQuality;
+
+					for each (Network ^ n in networkList){
+						if(n->SSID->Equals(ssid)){
+							goto endloop; //Quickly escape outer loop
+						}
+					}
+					List<PhysicalAddress^>^ bssids = gcnew List<PhysicalAddress^>();
+
+					PWLAN_BSS_LIST bss_list;
+					PWLAN_BSS_ENTRY bss_entry;
+
+					result = WlanGetNetworkBssList(this->_nwlanHandle,
+						&guid,
+						&(available_network->dot11Ssid),
+						available_network->dot11BssType,
+						available_network->bSecurityEnabled,
+						NULL,
+						&bss_list);
+
+					if(result == ERROR_NDIS_DOT11_POWER_STATE_INVALID){
+						throw gcnew WlanApiException("WlanInterface is turned off");
+					}else if (result != ERROR_SUCCESS){
+						throw gcnew WlanApiException("An error occurred retrieving networks list");
+					}
+
+					for(DWORD j=0; j<bss_list->dwNumberOfItems;j++){
+						bss_entry=(PWLAN_BSS_ENTRY) &bss_list->wlanBssEntries[j];
+
+						array<byte> ^ mac_bytes = gcnew array<byte>(6);
+						Marshal::Copy((IntPtr)bss_entry->dot11Bssid,mac_bytes,0,6);
+						PhysicalAddress ^ mac = gcnew PhysicalAddress(mac_bytes);
+
+						bssids->Add(mac);
+					}
+
+					WlanFreeMemory(bss_list);
+
+					Network ^ Wlan_Network= gcnew Network(type,ssid,bssids,signalStrength);
+
+					networkList->Add(Wlan_Network);
+
+endloop:			;
+				}
+
+				WlanFreeMemory(available_network_list);
+
+				return networkList;
 	}
 
 	Guid ManagedWifiContext::FromGUID( _GUID& guid ) {
