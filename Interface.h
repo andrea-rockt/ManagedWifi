@@ -1,38 +1,32 @@
 #pragma once
 
 #include"Network.h"
+#include"IInterface.h"
+#include"InterfaceState.h"
 
 using namespace System;
-using namespace System::Collections::ObjectModel;
+using namespace System::Collections::Generic;
 
 namespace ManagedWifi{
-	public ref class Interface
+		///<summary> Enum describing possible states of a wireless interface </summary>
+	
+
+	public ref class Interface : IInterface
 	{
 	public:
-		///<summary> Enum describing possible states of a wireless interface </summary>
-		enum class InterfaceState{
-			NotReady = 0,
-			Connected = 1,
-			AdHocNetworkFormed = 2,
-			Disconnecting = 3,
-			Disconnected = 4,
-			Associating = 5,
-			Discovering = 6,
-			Authenticating = 7 
-		};
-
+	
 		///<summary>Current state of the interface</summary>
 		///<seealso cref="InterfaceState"/>
-		property InterfaceState State{InterfaceState get();};
+		virtual property  InterfaceState State{InterfaceState get();};
 
 		///<summary>Interface description</summary>
-		property String ^ Description{String ^ get();};
+		virtual property  String ^ Description{String ^ get();};
 
 		///<summary>Interface guid </summary>
-		property System::Guid Guid{System::Guid get();};
+		virtual property System::Guid Guid{System::Guid get();};
 
-		property ReadOnlyCollection<Network^> ^ Networks{
-			ReadOnlyCollection<Network^> ^ get();
+		virtual property IEnumerable<INetwork^> ^ Networks{
+			IEnumerable<INetwork^> ^ get();
 		}
 
 

@@ -10,7 +10,7 @@ namespace ManagedWifi{
 				this->_signalStrength=signal_strength;
 			}
 
-			Network::BSSType Network::Type::get(){
+			BSSType Network::Type::get(){
 				return this->_type;
 			}
 
@@ -18,8 +18,8 @@ namespace ManagedWifi{
 				return this->_ssid;
 			}
 
-			ReadOnlyCollection<PhysicalAddress^> ^ Network::BSSIDs::get(){
-				return gcnew ReadOnlyCollection<PhysicalAddress^>(this->_bssids);
+			IEnumerable<PhysicalAddress^> ^ Network::BSSIDs::get(){
+				return gcnew List<PhysicalAddress^>(this->_bssids);
 			}
 
 			ULONG Network::SignalStrength::get(){

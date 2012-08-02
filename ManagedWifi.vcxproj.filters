@@ -36,6 +36,18 @@
     <ClInclude Include="Exceptions.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="IInterface.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="InterfaceState.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="INetwork.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="BSSType.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">

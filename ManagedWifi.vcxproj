@@ -77,12 +77,18 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BSSType.h" />
     <ClInclude Include="Exceptions.h" />
+    <ClInclude Include="IInterface.h" />
     <ClInclude Include="IManagedWifiContext.h" />
+    <ClInclude Include="INetwork.h" />
     <ClInclude Include="Interface.h" />
+    <ClInclude Include="InterfaceState.h" />
     <ClInclude Include="ManagedWifiContext.h" />
     <ClInclude Include="Network.h" />
     <ClInclude Include="resource.h" />

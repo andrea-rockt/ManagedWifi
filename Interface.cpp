@@ -1,11 +1,12 @@
 #include "StdAfx.h"
 #include "Interface.h"
 #include "ManagedWifiContext.h"
+
 using namespace System::Collections::Generic;
 
 namespace ManagedWifi{
 
-	Interface::InterfaceState Interface::State::get(){
+	InterfaceState Interface::State::get(){
 		return _state;
 	}
 
@@ -24,17 +25,17 @@ namespace ManagedWifi{
 		_state=state;
 	}
 
-	ReadOnlyCollection<Network^> ^ Interface::Networks::get(){
+	IEnumerable<INetwork^> ^ Interface::Networks::get(){
 		if(this->Context->IsAlive){
 
 			ManagedWifiContext ^ Context =(ManagedWifiContext ^) this->Context->Target;
 
 			if(Context->IsDisposed->Equals(false)){
-				IList<Network ^> ^ networks = ((ManagedWifiContext ^)(this->Context->Target))->GetAvailableNetworks(this);
-				return gcnew ReadOnlyCollection<Network^>(networks);
+				IList<INetwork ^> ^ networks = ((ManagedWifiContext ^)(this->Context->Target))->GetAvailableNetworks(this);
+				return gcnew List<INetwork^>(networks);
 			}
 		}
 		
-		throw gcnew ObjectDisposedException("Parent ManagedWifiContext was disposed");		
+		throw gcnew ObjectDisposedException("Parent ManagedWifiContext has been disposed");		
 	}
 }

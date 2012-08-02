@@ -23,8 +23,8 @@ namespace ManagedWifi {
 		
 		~ManagedWifiContext();
 		
-		virtual property ReadOnlyCollection<Interface^> ^ Interfaces {
-			ReadOnlyCollection<Interface^> ^ get();
+		virtual property IEnumerable<IInterface^> ^ Interfaces {
+			IEnumerable<IInterface^> ^ get();
 		};
 
 		virtual property Boolean ^ IsDisposed{
@@ -44,6 +44,6 @@ namespace ManagedWifi {
 		// TODO: aggiungere qui i metodi per la classe.
 
 	internal:
-		IList<Network ^> ^ GetAvailableNetworks(Interface^ i);
+		IList<INetwork ^> ^ GetAvailableNetworks(Interface^ i);
 	};
 }

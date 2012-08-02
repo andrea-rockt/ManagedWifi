@@ -48,9 +48,9 @@ namespace ManagedWifi {
 		WlanCloseHandle( _nwlanHandle, NULL );
 	}
 	
-	ReadOnlyCollection<Interface^> ^ ManagedWifiContext::Interfaces::get(){
+	IEnumerable<IInterface^> ^ ManagedWifiContext::Interfaces::get(){
 
-		IList<Interface ^> ^ interfaceList = gcnew List<Interface ^>();
+		IList<IInterface ^> ^ interfaceList = gcnew List<IInterface ^>();
 		
 		PWLAN_INTERFACE_INFO_LIST interface_info_list;
 		PWLAN_INTERFACE_INFO interface_info;
@@ -67,7 +67,7 @@ namespace ManagedWifi {
 			Interface ^ wlan_interface = gcnew Interface(
 				Marshal::PtrToStringAuto((IntPtr)interface_info->strInterfaceDescription), // Description String
 				FromGUID(interface_info->InterfaceGuid), //WlanInterface Guid
-				(Interface::InterfaceState)interface_info->isState //WlanInterface state
+				(InterfaceState)interface_info->isState //WlanInterface state
 				);
 
 			wlan_interface->Context= gcnew WeakReference(this);
@@ -76,11 +76,11 @@ namespace ManagedWifi {
 
 		WlanFreeMemory(interface_info_list);
 	
-		return gcnew ReadOnlyCollection<Interface ^>(interfaceList);
+		return gcnew List<IInterface ^>(interfaceList);
 	}	
 
-	IList<Network ^> ^ ManagedWifiContext::GetAvailableNetworks(Interface^ i){
-			List<Network ^> ^ networkList = gcnew List<Network ^>();
+	IList<INetwork ^> ^ ManagedWifiContext::GetAvailableNetworks(Interface^ i){
+			List<INetwork ^> ^ networkList = gcnew List<INetwork ^>();
 
 				DWORD result;
 				GUID guid = ToGUID(i->Guid);
@@ -104,7 +104,7 @@ namespace ManagedWifi {
 
 
 					String ^ ssid= Marshal::PtrToStringAnsi((IntPtr)available_network->dot11Ssid.ucSSID,(Int32)available_network->dot11Ssid.uSSIDLength);
-					Network::BSSType type = (Network::BSSType)available_network->dot11BssType;
+					BSSType type = (BSSType)available_network->dot11BssType;
 					ULONG signalStrength=available_network->wlanSignalQuality;
 
 					for each (Network ^ n in networkList){
@@ -143,7 +143,7 @@ namespace ManagedWifi {
 
 					WlanFreeMemory(bss_list);
 
-					Network ^ Wlan_Network= gcnew Network(type,ssid,bssids,signalStrength);
+					INetwork ^ Wlan_Network= gcnew Network(type,ssid,bssids,signalStrength);
 
 					networkList->Add(Wlan_Network);
 
