@@ -21,10 +21,11 @@ namespace ManagedWifiTest
                         Console.WriteLine("\tState: {0}",iface.State.ToString());
                         Console.WriteLine("\tGUID: {0}",iface.Guid.ToString());
 
-                        foreach (var network in iface.Networks)
+                        foreach (var network in context.GetAvailableNetworks(iface))
                         {
                             Console.WriteLine("\t\tNetwork: {0} - {1}/100",network.SSID,network.SignalStrength);
                         }
+
                     Console.ReadKey();
                 }
             }

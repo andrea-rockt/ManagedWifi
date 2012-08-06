@@ -24,18 +24,4 @@ namespace ManagedWifi{
 		_guid=guid;
 		_state=state;
 	}
-
-	IEnumerable<INetwork^> ^ Interface::Networks::get(){
-		if(this->Context->IsAlive){
-
-			ManagedWifiContext ^ Context =(ManagedWifiContext ^) this->Context->Target;
-
-			if(Context->IsDisposed->Equals(false)){
-				IList<INetwork ^> ^ networks = ((ManagedWifiContext ^)(this->Context->Target))->GetAvailableNetworks(this);
-				return gcnew List<INetwork^>(networks);
-			}
-		}
-		
-		throw gcnew ObjectDisposedException("Parent ManagedWifiContext has been disposed");		
-	}
 }

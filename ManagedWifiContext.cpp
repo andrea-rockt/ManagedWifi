@@ -69,17 +69,15 @@ namespace ManagedWifi {
 				FromGUID(interface_info->InterfaceGuid), //WlanInterface Guid
 				(InterfaceState)interface_info->isState //WlanInterface state
 				);
-
-			wlan_interface->Context= gcnew WeakReference(this);
 			interfaceList->Add(wlan_interface);
 		}
 
 		WlanFreeMemory(interface_info_list);
 	
-		return gcnew List<IInterface ^>(interfaceList);
+		return interfaceList;
 	}	
 
-	IList<INetwork ^> ^ ManagedWifiContext::GetAvailableNetworks(Interface^ i){
+	IEnumerable<INetwork ^> ^ ManagedWifiContext::GetAvailableNetworks(IInterface ^ i){
 			List<INetwork ^> ^ networkList = gcnew List<INetwork ^>();
 
 				DWORD result;
@@ -87,7 +85,8 @@ namespace ManagedWifi {
 				PWLAN_AVAILABLE_NETWORK_LIST available_network_list;
 				PWLAN_AVAILABLE_NETWORK available_network;
 
-				result = WlanGetAvailableNetworkList(this->_nwlanHandle,
+				result = WlanGetAvailableNetworkList(
+					this->_nwlanHandle,
 					&guid,
 					0, 
 					NULL, 

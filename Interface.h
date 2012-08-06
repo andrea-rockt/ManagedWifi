@@ -25,15 +25,7 @@ namespace ManagedWifi{
 		///<summary>Interface guid </summary>
 		virtual property System::Guid Guid{System::Guid get();};
 
-		virtual property IEnumerable<INetwork^> ^ Networks{
-			IEnumerable<INetwork^> ^ get();
-		}
-
-
 		Interface(String ^ description, System::Guid guid, InterfaceState state);
-
-	internal:
-		WeakReference ^ Context;
 
 	private:
 		initonly String ^ _description;

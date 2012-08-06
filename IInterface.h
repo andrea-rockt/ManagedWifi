@@ -13,9 +13,5 @@ namespace ManagedWifi {
 		virtual property InterfaceState State{InterfaceState get();}
 	
 		virtual property System::Guid Guid{System::Guid get();}
-
-		virtual property IEnumerable<INetwork^> ^ Networks{
-			IEnumerable<INetwork^> ^ get();
-		}
 	};
 }

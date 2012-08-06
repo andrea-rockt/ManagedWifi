@@ -33,6 +33,8 @@ namespace ManagedWifi {
 			};
 		};
 		
+		virtual IEnumerable<INetwork ^> ^ GetAvailableNetworks(IInterface ^ wlan_interface);	
+
 	private:
 		bool _isDisposed;
 		HANDLE _nwlanHandle;
@@ -42,8 +44,5 @@ namespace ManagedWifi {
 	protected:
 		!ManagedWifiContext();
 		// TODO: aggiungere qui i metodi per la classe.
-
-	internal:
-		IList<INetwork ^> ^ GetAvailableNetworks(Interface^ i);
 	};
 }
