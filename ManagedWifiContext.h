@@ -10,7 +10,7 @@ using namespace System::Collections::Generic;
 
 namespace ManagedWifi {
 
-	public ref class ManagedWifiContext : IManagedWifiContext
+	public ref class ManagedWifiContext : IManagedWifiContext, IDisposable
 	{
 
 	public:
